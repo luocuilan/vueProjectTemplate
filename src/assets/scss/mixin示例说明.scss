@@ -1,0 +1,67 @@
+//示例
+// @mixin 值只会复制代码 ， 为了让样式中相同代码合并，我们可以通过%placeholders来实现。 开头使用 % 符号
+
+/**
+ * 水平居中
+ */
+@mixin horizontal-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+%horizontal-center {
+  @include horizontal-center;
+}
+
+
+//使用 @mixin 示例
+
+$width: 960px !default;
+.container {
+  width: $width;
+  @include horizontal-center;
+}
+.menu {
+  width: $width / 2;
+  @include horizontal-center;
+}
+
+//=== 编译输出的CSS ， 可以看到没有合并代码
+.container {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.menu{
+  width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+//使用 %placeholders 示例
+
+$width: 960px !default;
+.container {
+  width: $width;
+  @extend %horizontal-center;
+}
+
+.menu {
+  width: $width / 2;
+  @extend %horizontal-center;
+}
+
+//=== 编译输出CSS , 可以看到合并了代码
+.container, .menu {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  width: 960px;
+}
+
+.menu {
+  width: 480px;
+}

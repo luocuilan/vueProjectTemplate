@@ -25,6 +25,13 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+
+    /* *
+     * 0或’off’：关闭规则。
+     * 1或’warn’：打开规则，并且作为一个警告（并不会导致检查不通过）。
+     * 2或’error’：打开规则，并且作为一个错误 (退出码为1，检查不通过)。
+    * */
+
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
@@ -58,7 +65,7 @@ module.exports = {
     "eqeqeq": ["error", "smart"],  //要求使用===和!==
     "no-alert": "warn",  //禁用Alert
     "no-caller": "error",  //禁用caller或callee(严格模式中不可使用)
-    // "no-empty-function": "warn",  //禁止出现空函数
+    "no-empty-function": "off",  //禁止出现空函数
     "no-eval": "error",  //禁用eval()
     "no-labels": "error",  //禁用标签语句
     // "no-magic-numbers": "warn",  //禁用魔术数字 eg:oneHour=now+(60*60*1000)
@@ -89,6 +96,7 @@ module.exports = {
     // "new-cap": "error",  //构造函数名称首字母大写
     "comma-dangle": "warn",  //禁用拖尾逗号
     "no-array-constructor": "warn",  //禁止使用Array构造函数
+    "space-before-function-paren": [0, "always"],//函数定义时括号前面要不要有空格
 
     /**-------------ECMAScript 6------------------- */
     // "arrow-body-style": ["error", "always"],  //强制箭头函数使用花括号{}

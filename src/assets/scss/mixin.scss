@@ -1,0 +1,58 @@
+//动画调用函数
+@mixin animation($name, $duration , $function : ease, $delay : 0ms, $count : 1, $mode : both) {
+  -webkit-animation-name: $name;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-timing-function: $function;
+  -webkit-animation-delay: $delay;
+  -webkit-animation-iteration-count: $count;
+  -webkit-animation-fill-mode: $mode
+}
+
+
+/**
+ * 定位 默认 absolute 定位
+ */
+@mixin absolute($top : 0, $left : 0, $type : absolute) {
+  position: $type;
+  top: $top;
+  left: $left;
+}
+
+/**
+ * 定位居中 默认 absolute 定位
+ */
+@mixin absCenter($top : 0, $left : 0, $type : absolute) {
+  position: $type;
+  top: $top;
+  left: $left;
+  margin-left: -($left / 2) + px;
+}
+
+/**
+ * 定位x居中 默认 absolute 定位
+ */
+@mixin absCenterX( $top : 0, $type : absolute) {
+  position: $type;
+  letf: 50%;
+  top: $top;
+  transform: translateX(-50%)
+}
+
+/**
+ * 定位y居中 默认 absolute 定位
+ */
+@mixin absCenterY( $left : 0, $type : absolute) {
+  position: $type;
+  top: 50%;
+  left: $left;
+  transform: translateY(-50%)
+}
+
+/**
+ * 设置背景
+ */
+@mixin bgSet($url : '', $size : 100% 100%) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: $size;
+}
