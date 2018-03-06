@@ -2,7 +2,6 @@
 import axios from 'axios';
 import * as qs from 'qs';
 import { Toast } from '@/components/v-ui/src';
-import api from '@/common/api';
 
 const MIN_RES_CODE = 200;
 const MAX_RES_CODE = 300;
@@ -53,9 +52,6 @@ const resThen = res => {
   }
 
   if (NO_LOGIN_CODES.indexOf(code) > -1) {
-    localStorage.removeItem('token'); //清除token
-    localStorage.removeItem('hasLogin');
-    window.location.href = window.location.origin + api.auth;
     return Promise.reject(res);
   } else if (code === SUCCESS_CODE) {
     return Promise.resolve(res.data);
@@ -71,13 +67,10 @@ const resThen = res => {
  * @return {Promise}         Promise
  */
 export const get = (url, params = {}) => {
-  const TOKEN = localStorage.getItem('token');
   return axios(url, {
     method: 'GET',
     params: params,
-    headers: {
-      'newYeartoken': TOKEN
-    }
+    headers: {}
   })
     .then((res) => {
       console.log({url: url, params: params, res: res});
@@ -97,7 +90,6 @@ export const get = (url, params = {}) => {
  * @return {Promise}        Promise
  */
 export const commonPost = (url, params, contentType = 'form') => {
-  const TOKEN = localStorage.getItem('token');
   if (contentType !== 'form' && contentType !== 'json') {
     contentType = 'form';
   }
@@ -105,7 +97,6 @@ export const commonPost = (url, params, contentType = 'form') => {
     method: 'POST',
     headers: {
       'Content-Type': CONTENT_TYPES[contentType],
-      'newYeartoken': TOKEN
     },
     data: (contentType !== 'json') ? qs.stringify(params) : params
   }).then(res => {
@@ -125,12 +116,10 @@ export const commonPost = (url, params, contentType = 'form') => {
  * @return {Promise}        Promise
  */
 export const upload = (url, params) => {
-  const TOKEN = localStorage.getItem('token');
   return axios(url, {
     method: 'POST',
     headers: {
       'Content-Type': CONTENT_TYPE,
-      'newYeartoken': TOKEN
     },
     data: params,
     transformRequest: [function (data) {
